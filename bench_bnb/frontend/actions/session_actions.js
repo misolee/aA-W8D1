@@ -10,30 +10,39 @@ const receiveCurrentUser = (currentUser) => {
         type: RECEIVE_CURRENT_USER,
         currentUser
     };
-}
+};
 
 const logoutCurrentUser = () => {
     return {
         type: LOGOUT_CURRENT_USER
-    }
-}
+    };
+};
 
 const receiveErrors = (errors) => {
+    console.log(errors);
     return {
         type: RECEIVE_ERRORS,
         errors
-    }
-}
+    };
+};
 
 // thunk action creators
 export const login = (user) => (dispatch) => (
-    sessionUtils.login(user).then(user => dispatch(receiveCurrentUser(user), err => dispatch(receiveErrors(err.responseJSON))))
-)
+    sessionUtils.login(user)
+        .then(user => dispatch(receiveCurrentUser(user)),
+            err => dispatch(receiveErrors(err.responseJSON)))
+);
 
 export const logout = () => (dispatch) => (
-    sessionUtils.logout().then(() => dispatch(logoutCurrentUser()))
-)
+    sessionUtils.logout()
+        .then(() => dispatch(logoutCurrentUser()))
+);
 
 export const signup = (user) => (dispatch) => (
-    sessionUtils.signup(user).then(user => dispatch(receiveCurrentUser(user), err => dispatch(receiveErrors(err.responseJSON))))
-)
+    sessionUtils.signup(user)
+        .then(user => dispatch(receiveCurrentUser(user)),
+            err => {
+                console.log(err);
+                dispatch(receiveErrors(err.responseJSON))
+            })
+);

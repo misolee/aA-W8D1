@@ -14,8 +14,8 @@ const Greeting = ({currentUser, logout}) => {
     const signUpOrIn = () => {
         return(
             <div>
-                <Link to="/users/new">Sign Up</Link>
-                <Link to="/session/new">Log In</Link>
+                <Link to="/signup">Sign Up</Link>
+                <Link to="/login">Log In</Link>
             </div>
         );
     }
